@@ -5,21 +5,14 @@ EAPI=7
 
 inherit bash-completion-r1 elisp-common
 
-if [[ ${PV} = 9999* ]]; then
-	EGIT_REPO_URI="https://git.zx2c4.com/password-store"
-	inherit git-r3
-else
-	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86 ~x64-macos"
-	COMMIT_ID="918992c19231b33b3d4a3288a7288a620e608cb4"
-	SRC_URI="https://git.zx2c4.com/password-store/snapshot/password-store-${COMMIT_ID}.tar.xz"
-	S="${WORKDIR}/${PN}"
-fi
-
 DESCRIPTION="Stores, retrieves, generates, and synchronizes passwords securely"
 HOMEPAGE="https://www.passwordstore.org/"
+SRC_URI="https://git.zx2c4.com/password-store/snapshot/password-store-${PV}.tar.xz"
+S="${WORKDIR}/password-store-${PV}"
 
-SLOT="0"
 LICENSE="GPL-2"
+SLOT="0"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86 ~x64-macos"
 IUSE="+git wayland X zsh-completion fish-completion emacs dmenu rofi importers elibc_Darwin"
 
 RDEPEND="
@@ -37,15 +30,11 @@ RDEPEND="
 	emacs? ( >=app-editors/emacs-23.1:* >=app-emacs/f-0.11.0 >=app-emacs/s-1.9.0 >=app-emacs/with-editor-2.5.11 )
 "
 
-src_unpack() {
-	default
-
-	# Hack: Tests fail if the path length is too long
-	mv "${WORKDIR}/password-store-${COMMIT_ID}" "${WORKDIR}/${PN}"
-}
+PATCHES=( "${FILESDIR}"/rofi.patch )
 
 src_prepare() {
-	default
+	use rofi && eapply "${FILESDIR}"/rofi.patch
+	eapply_user
 
 	use elibc_Darwin || return
 	# use coreutils'
@@ -69,7 +58,7 @@ src_install() {
 		WITH_ZSHCOMP=$(usex zsh-completion) \
 		WITH_FISHCOMP=$(usex fish-completion)
 	if use rofi; then
-		sed -i -e 's/dmenu/rofi -dmenu/g' contrib/dmenu/passmenu
+		sed -i -e 's/=dmenu/="rofi -dmenu"/g' contrib/dmenu/passmenu
 	fi
 	if use rofi || use dmenu; then
 		dobin contrib/dmenu/passmenu
