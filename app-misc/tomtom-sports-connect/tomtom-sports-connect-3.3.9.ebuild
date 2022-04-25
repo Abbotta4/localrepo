@@ -15,6 +15,8 @@ RDEPEND="
 	=media-libs/gstreamer-0.10.36-r2
 	=media-libs/gst-plugins-base-0.10.36-r2
 	dev-qt/qtxmlpatterns
+	dev-qt/qt3d
+	dev-db/mysql
 "
 BUILD="
 	dev-util/patchelf
