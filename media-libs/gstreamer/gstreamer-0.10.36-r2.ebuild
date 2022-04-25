@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
 inherit eutils multilib multilib-minimal pax-utils
 
@@ -46,6 +46,10 @@ src_prepare() {
 	if [[ ${ABI} != x86 && ${ABI} != amd64 ]]; then
 		sed -e 's#check:\(.*\)$(CHECK_EXPORTS)#check:\1#' -i Makefile.{am,in} || die
 	fi
+
+	# https://blfs-dev.linuxfromscratch.narkive.com/p6sDRfo5/gsteamer-0-10-36-and-bison-3-0
+	sed -i -e '/YYLEX_PARAM/d' -e '/parse-param.*scanner/i %lex-param { void *scanner }' gst/parse/grammar.y
+	eapply_user
 }
 
 src_configure() {

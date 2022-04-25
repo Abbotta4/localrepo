@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI=7
 
 GST_ORG_MODULE="gst-plugins-base"
 inherit eutils gstreamer
@@ -32,13 +32,13 @@ src_prepare() {
 	sed -i -e 's:X_PRE_LIBS -lSM -lICE:X_PRE_LIBS:' "${S}"/configure || die
 
 	# Fix compilation with gcc-4.9, bug #529962
-	epatch "${FILESDIR}"/${PN}-0.10.36-gcc-4.9.patch
+	eapply "${FILESDIR}"/${PN}-0.10.36-gcc-4.9.patch
 
 	# baseaudiosink: Resync when ringbuffer resets (from '0.10' branch)
-	epatch "${FILESDIR}"/${PN}-0.10.36-resync-ringbuffer.patch
+	eapply "${FILESDIR}"/${PN}-0.10.36-resync-ringbuffer.patch
 
 	# Fix compilation with make 4.3, bug #705974
-	epatch "${FILESDIR}"/${PN}-0.10.36-make43.patch
+	eapply "${FILESDIR}"/${PN}-0.10.36-make43.patch
 }
 
 multilib_src_configure() {
@@ -69,5 +69,5 @@ multilib_src_configure() {
 multilib_src_install_all() {
 	DOCS="AUTHORS NEWS README RELEASE"
 	einstalldocs
-	prune_libtool_files --modules
+	find "${ED}" -name '*.la' -delete || die
 }
