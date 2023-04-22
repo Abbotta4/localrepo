@@ -1,0 +1,32 @@
+diff --git a/launcher/launcher.py b/launcher/launcher.py
+index 2eda325..8530cbc 100644
+--- a/launcher/launcher.py
++++ b/launcher/launcher.py
+@@ -111,7 +111,7 @@ class TTRLauncher(FSM):
+ 	def enterLaunchGame(self):
+ 		B='TTREngine';A='./TTREngine'
+ 		if self.credentials[2]:save_login(self.credentials[0],self.cookie);self.sendOutput((messagetypes.LAUNCHER_SAVE_USER,self.credentials[0],self.cookie));os.environ['TTR_PERSISTCOOKIE']='1'
+-		os.environ['TTR_PLAYCOOKIE']=self.cookie;os.environ['TTR_GAMESERVER']=self.gameserver;pwd=os.getcwd();os.chdir(os.environ.get('PATCHER_BASE','./'))
++		os.environ['TTR_PLAYCOOKIE']=self.cookie;os.environ['TTR_GAMESERVER']=self.gameserver;pwd=os.getcwd();os.chdir(os.environ['HOME'] + '/.local/share/toontown/')
+ 		if sys.platform=='win32':game=subprocess.Popen('./TTREngine64'if Patcher.getPlatform()=='win64'else A,creationflags=134217728)
+ 		else:
+ 			modes=os.stat(B).st_mode
+diff --git a/launcher/settings.py b/launcher/settings.py
+index f08dcc6..89e659c 100644
+--- a/launcher/settings.py
++++ b/launcher/settings.py
+@@ -1,4 +1,3 @@
+-_B='PATCHER_BASE'
+ _A='https://download.toontownrewritten.com/launcher/windows/ttr_launcher.json'
+ from os import environ,path
+ import sys
+@@ -9,7 +8,7 @@ DefaultDownloadLocation='https://www.toontownrewritten.com/'
+ SSLConnection='www.toontownrewritten.com',443
+ LoginPostLocation='/api/login?format=json'
+ StatusGetLocation='/api/status'
+-ResourcesBaseDir=environ.get('RESOURCES_BASE','')
+-PatcherBaseDir=environ.get(_B,'./')
++ResourcesBaseDir='/usr/share/toontown/'
++PatcherBaseDir=environ['HOME'] + '/.local/share/toontown/'
+ if getattr(sys,'frozen',False)and _B not in environ:PatcherBaseDir=path.dirname(sys.executable)
+ UsernameStore=path.abspath(path.join(PatcherBaseDir,'.users'))

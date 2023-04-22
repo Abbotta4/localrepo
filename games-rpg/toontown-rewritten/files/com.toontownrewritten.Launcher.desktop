@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Toontown Rewritten
+Exec=toontown
+Type=Application
+Icon=com.toontownrewritten.Launcher
+MimeType=x-scheme-handler/discord-492140080782376960;
+Categories=Game;
