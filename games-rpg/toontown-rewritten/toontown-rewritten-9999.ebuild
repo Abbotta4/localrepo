@@ -1,6 +1,6 @@
 EAPI=7
 
-PYTHON_COMPAT=( python3_10 )
+PYTHON_COMPAT=( python3_10 python3_11 )
 inherit xdg-utils python-single-r1
 
 DESCRIPTION="An MMO originally by Disney, rewritten."
