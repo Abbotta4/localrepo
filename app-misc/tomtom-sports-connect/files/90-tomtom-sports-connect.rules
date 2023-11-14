@@ -1,8 +1,0 @@
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="1390", ATTRS{idProduct}=="7474", GROUP="users", MODE="0660" # TomTom Fitness Watch
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="1390", ATTRS{idProduct}=="7475", GROUP="users", MODE="0660" # TomTom Fitness Watch
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="1390", ATTRS{idProduct}=="7476", GROUP="users", MODE="0660" # TomTom Fitness Watch (recovery)
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="1390", ATTRS{idProduct}=="7477", GROUP="users", MODE="0660" # TomTom Fitness Watch (no ms)
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="1390", ATTRS{idProduct}=="7480", GROUP="users", MODE="0660" # TomTom Activity Tracker
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="1390", ATTRS{idProduct}=="7485", GROUP="users", MODE="0660" # TomTom Fitness Watch
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="1390", ATTRS{idProduct}=="7486", GROUP="users", MODE="0660" # TomTom Fitness Watch (recovery)
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="1390", ATTRS{idProduct}=="7487", GROUP="users", MODE="0660" # TomTom Fitness Watch (no ms)
